@@ -4,6 +4,7 @@ const PIPES = preload("res://pipes/pipes.tscn")
 
 @onready var spawn_u: Marker2D = $Spawner/SpawnU
 @onready var spawn_l: Marker2D = $Spawner/SpawnL
+@onready var spawn_timer: Timer = $"Spawner/Spawn Timer"
 
 
 
@@ -27,3 +28,13 @@ func spawn_pipes() -> void:
 	pipes_container.add_child(new_pipes)
 	
 	new_pipes.global_position = Vector2(spawn_l.position.x, y_position)
+	
+	
+func stop_pipes() -> void:
+	spawn_timer.stop()
+	
+	for pipe in pipes_container.get_children():
+		pipe.set_process(false)
+
+func _on_plane_died() -> void:
+	stop_pipes()
