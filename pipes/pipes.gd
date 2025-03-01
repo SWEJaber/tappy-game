@@ -15,10 +15,14 @@ func check_off_screen() -> void:
 	if position.x < OFF_SCREEN: 
 		queue_free()
 	
-	
 func on_plane_died() -> void:
 	set_process(false)
 
 # May not work properly on a Macbook when you minimize the game window
 func _on_screen_exited() -> void:
 	queue_free()
+
+
+func _on_pipe_body_entered(body: Node2D) -> void:	
+	if body is Tappy:
+		body.die()
