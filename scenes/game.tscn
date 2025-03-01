@@ -22,6 +22,7 @@ position = Vector2(102, 467)
 position = Vector2(0, 864)
 
 [node name="Pipes Container" type="Node2D" parent="."]
+position = Vector2(0, 200)
 
 [node name="Spawner" type="Node" parent="."]
 

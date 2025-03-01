@@ -24,6 +24,6 @@ func spawn_pipes() -> void:
 	
 	var y_position: float = randf_range(spawn_u.position.y, spawn_l.position.y)
 	
-	new_pipes.position = Vector2(spawn_l.position.x, y_position)
-	
 	pipes_container.add_child(new_pipes)
+	
+	new_pipes.global_position = Vector2(spawn_l.position.x, y_position)
