@@ -1,8 +1,47 @@
-[gd_scene load_steps=4 format=3 uid="uid://ch8jbw0gwbosn"]
+[gd_scene load_steps=8 format=3 uid="uid://ch8jbw0gwbosn"]
 
+[ext_resource type="Script" path="res://scenes/game_over_ui.gd" id="1_aascd"]
 [ext_resource type="AudioStream" uid="uid://bu8ppy1hmbu74" path="res://assets/audio/game_over.wav" id="1_n5a71"]
 [ext_resource type="LabelSettings" uid="uid://legygykjs48w" path="res://assets/LG_red-64.tres" id="1_vo81s"]
 [ext_resource type="LabelSettings" uid="uid://c04cmr3w07c7i" path="res://assets/LG_white_48.tres" id="2_xwirf"]
+
+[sub_resource type="Animation" id="Animation_c6b8m"]
+resource_name = "flicker"
+loop_mode = 1
+step = 0.3
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Space Label:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.333333, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_i2igq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MarginContainer/Space Label:self_modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_m550c"]
+_data = {
+"RESET": SubResource("Animation_i2igq"),
+"flicker": SubResource("Animation_c6b8m")
+}
 
 [node name="Game Over UI" type="Control"]
 layout_mode = 3
@@ -11,6 +50,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_aascd")
 
 [node name="Sound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_n5a71")
@@ -43,3 +83,11 @@ layout_mode = 2
 size_flags_horizontal = 4
 text = "PRESS SPACE"
 label_settings = ExtResource("2_xwirf")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_m550c")
+}
+autoplay = "flicker"
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
