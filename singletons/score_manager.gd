@@ -19,9 +19,5 @@ func change_highscore() -> void:
 		high_score = score
 
 func on_game_over() -> void: 
-	
-	var scores = { "score": score, "high_score": high_score }
-	
-	print("game over score!", scores)
 	change_highscore()
 	reset_score()
