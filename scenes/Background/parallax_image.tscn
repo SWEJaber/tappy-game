@@ -1,0 +1,11 @@
+[gd_scene load_steps=2 format=3 uid="uid://beg856ga5svm7"]
+
+[ext_resource type="Script" path="res://scenes/Background/parallax_image.gd" id="1_isd4l"]
+
+[node name="ParallaxImage" type="Parallax2D"]
+z_index = -4
+follow_viewport = false
+ignore_camera_scroll = true
+script = ExtResource("1_isd4l")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]

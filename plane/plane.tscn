@@ -75,6 +75,7 @@ _data = {
 }
 
 [node name="Plane" type="CharacterBody2D" groups=["Plane"]]
+collision_layer = 8
 script = ExtResource("1_qmodg")
 
 [node name="AnimSprite" type="AnimatedSprite2D" parent="."]
@@ -95,4 +96,5 @@ libraries = {
 
 [node name="Engine Sound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("3_28i0f")
+volume_db = -38.0
 autoplay = true

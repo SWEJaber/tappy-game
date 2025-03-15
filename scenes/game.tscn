@@ -1,10 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://c8m4daaxj57ol"]
+[gd_scene load_steps=13 format=3 uid="uid://c8m4daaxj57ol"]
 
 [ext_resource type="Script" path="res://scenes/game.gd" id="1_3erxk"]
 [ext_resource type="Texture2D" uid="uid://cj7fbhwmesma8" path="res://assets/background/rocks_2.png" id="1_3w8f5"]
 [ext_resource type="PackedScene" uid="uid://cepqidyevoftt" path="res://barrier/barrier.tscn" id="1_ei3be"]
 [ext_resource type="PackedScene" uid="uid://2oo2ypnnkqni" path="res://plane/plane.tscn" id="2_6wrec"]
 [ext_resource type="PackedScene" uid="uid://ch8jbw0gwbosn" path="res://scenes/game_over_ui.tscn" id="2_tn8jk"]
+[ext_resource type="PackedScene" uid="uid://beg856ga5svm7" path="res://scenes/Background/parallax_image.tscn" id="2_vqnai"]
+[ext_resource type="Texture2D" uid="uid://cuq8a6pp5s5l" path="res://assets/background/sky.png" id="3_v7hx4"]
+[ext_resource type="Texture2D" uid="uid://dxlc28tb0i8vx" path="res://assets/background/clouds_2.png" id="4_f53mh"]
+[ext_resource type="Texture2D" uid="uid://m0uet0j8qy6s" path="res://assets/background/rocks_1.png" id="5_bun7y"]
 [ext_resource type="Script" path="res://pipes/pipe_spawner.gd" id="5_fmoev"]
 [ext_resource type="PackedScene" uid="uid://c3bnhpgbnfnek" path="res://scenes/HUD/hud.tscn" id="7_not30"]
 [ext_resource type="PackedScene" uid="uid://24syaclofeao" path="res://scenes/Background/scrolling_bg.tscn" id="8_dfj28"]
@@ -12,7 +16,30 @@
 [node name="Game" type="Node2D"]
 script = ExtResource("1_3erxk")
 
+[node name="ParallaxBG" type="Node2D" parent="."]
+position = Vector2(0, 427)
+
+[node name="Sky" parent="ParallaxBG" instance=ExtResource("2_vqnai")]
+scroll_scale = Vector2(0, 0)
+texture = ExtResource("3_v7hx4")
+
+[node name="Cloud 2" parent="ParallaxBG" instance=ExtResource("2_vqnai")]
+scroll_scale = Vector2(0.3, 0.3)
+autoscroll = Vector2(-20, 0)
+texture = ExtResource("4_f53mh")
+
+[node name="Rocks 1" parent="ParallaxBG" instance=ExtResource("2_vqnai")]
+scroll_scale = Vector2(0.5, 0.5)
+autoscroll = Vector2(-50, 0)
+texture = ExtResource("5_bun7y")
+
+[node name="Rocks 2" parent="ParallaxBG" instance=ExtResource("2_vqnai")]
+scroll_scale = Vector2(0.75, 0.75)
+autoscroll = Vector2(-80, 0)
+texture = ExtResource("1_3w8f5")
+
 [node name="ScrollingBG" parent="." instance=ExtResource("8_dfj28")]
+visible = false
 
 [node name="Ceiling" parent="." instance=ExtResource("1_ei3be")]
 position = Vector2(0, -22)
@@ -27,6 +54,7 @@ position = Vector2(102, 467)
 
 [node name="Floor" parent="." instance=ExtResource("1_ei3be")]
 position = Vector2(0, 864)
+collision_mask = 8
 
 [node name="Pipes Container" type="Node2D" parent="."]
 position = Vector2(0, 200)
